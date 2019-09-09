@@ -27,13 +27,21 @@ public class MainApp {
 		 */
 		
 		//delete
+		/*
+		 * em.getTransaction().begin(); Employee emp = em.find(Employee.class,1002);
+		 * System.out.println(emp); em.remove(emp); em.getTransaction().commit();
+		 * System.out.println("After commit"); System.out.println(emp);
+		 */
+		
+		
+		//Generated auto increament Key
+		
+		Employee emp = new Employee("Ram Prasad", "Male", 22, 13898f);
 		em.getTransaction().begin();
-		Employee emp = em.find(Employee.class,1002);
-		System.out.println(emp);
-		em.remove(emp);
+		em.persist(emp);
 		em.getTransaction().commit();
-		System.out.println("After commit");
 		System.out.println(emp);
+		
 	}
 
 }
