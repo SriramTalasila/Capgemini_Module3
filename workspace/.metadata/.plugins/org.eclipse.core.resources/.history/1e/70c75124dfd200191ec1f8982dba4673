@@ -1,0 +1,19 @@
+
+package com.cg;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class MainApp {
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPA-PU");
+		EntityManager em = factory.createEntityManager();
+		Employee employee = new Employee(1002, "Sriram", "male", 21, 19068f);
+		em.getTransaction().begin();
+		em.persist(employee);
+		em.getTransaction().commit();
+		System.out.println("Data saved");
+	}
+
+}

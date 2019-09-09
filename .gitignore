@@ -1,0 +1,137 @@
+--Database Objects 
+
+--Exercise 4.1 
+
+create table Customer_1(
+
+CustomerId Number(5),
+Cust_Name varchar2(20),
+Address1 Varchar2(30),
+Address2 Varchar2(30)
+);
+
+Alter table Customer_1
+Modify Cus_Name VARCHAR2(30);
+
+Alter table customer_1
+Rename Column Cust_Name to CustomerName ;
+
+Alter table Customer_1
+Modify CustomerName not null;
+
+Alter table Customer_1
+Add( Gender Varchar2(1),
+Age Number(3),
+PhoneNo Number(10));
+ 
+Alter Table Customer_1
+Rename  to Cust_Table;
+
+Insert into Cust_Table values(1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25,7878776);
+Insert into Cust_Table values(1001, 'George', '#116 France', '#116 France', 'M', 25, 434524);
+Insert into Cust_Table values(1002, 'Becker', '#114 New York', '#114 New York', 'M', 45, 431525);
+
+Alter table Cust_Table 
+Add Constraint CustId_Prim Primary Key(CustomerId);
+
+insert into Cust_Table values(1002, 'John', '#114 Chicago', '#114 Chicago', 'M', 45, 439525);
+
+Alter table Cust_Table
+Disable constraint CustId_Prim;
+
+insert into Cust_Table values(1002, 'Becker', '#114 New York', '#114 New york' , 'M', 45, 431525);
+insert into Cust_Table values(1003, 'Nanapatekar', '#115 India', '#115 India' , 'M', 45, 431525);
+
+Alter table Cust_Table
+Enable constraint CustId_Prim;
+
+Alter table Cust_Table
+Drop primary key ;
+
+insert into Cust_Table values(1002, 'Becker', '#114 New York', '#114 New york' , 'M', 45, 431525,15000.50);
+insert into Cust_Table values(1003, 'Nanapatekar', '#115 India', '#115 India' , 'M', 45, 431525,20000.50);
+
+Truncate table Cust_Table;
+
+Alter table Cust_Table
+Add E_mail Varchar2(50);
+
+Alter table Cust_Table
+Drop column E_mail;
+
+Create table Customer_1(
+CustomerId number(5), CustomerName varchar2(30), Address1 varchar2(50), Address2 varchar2(50), phoneno number(10)
+);
+
+create table Suppliers as( Select customerID as SuppID, CustomerName as SName, Address1 as Addr1, Address2 as Addr2, PhoneNo as Contactno from Customer_1);
+
+Drop table Customer_1;
+Drop Table Suppliers;
+
+
+create table CustomerMaster(
+CustomerId Number(5),
+CustomerName Varchar2(30) Not Null,
+Addressl Varchar2(30) Not Null,
+Address2 Varchar2(30),
+Gender Varchar2(1),
+Age Number(3),
+PhoneNo Number(10),
+constraint CustId_PK primary key(CustomerId));
+
+	   Create table Accoutnmaster(
+       customerid number(5),
+       Accountnumber number(10) primary key(acno),
+       accounttype char(3),
+       ledgerbalance number(10) Not Null);
+	  
+       Create sequence seq_ano
+		MINVALUE 101
+		MAXVALUE 10000
+		START WITH 101
+		INCREMENT BY 1
+		CACHE 101;
+
+
+insert into CustomerMaster values(1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25, 7878776);
+insert into CustomerMaster values(1001, 'George', '#116 France', '#116 France', 'M', 25, 434524);
+insert into CustomerMaster values(1002, 'Becker', '#114 New York', '#114 New York', 'M', 45, 431525);
+
+Alter table Accountmaster ADD constraint Cust_acc FOREIGN KEY(customerid) REFERENCES customermaster(customerid);
+ 
+alter table Accountmaster add constraint ck_ac check(accountype='NRI' or accountype='IND');
+
+alter table Accountmaster add constraint Balance_check(ledger balance > 5000);
+ 
+Delete from Accountmaster,customertable where customerid = 1001;
+ 
+Create table accountdetails as (select * from Accountmaster);
+
+CREATE VIEW Acc_view AS SELECT(Customerid,Customername,Accountnumber,AccountType,ledgerBalance)
+	from AccountMaster;
+ 
+CREATE VIEW vAccs_Dtls AS SELECT 	Accounttype,ledgerbalance from Accountmaster where accounttype = 'IND' and ledgerbalance < 10000;
+ 
+ 
+ 
+CREATE sequence SEQ_DEPT minvalue 40 start with 40
+	increment by 10 MAX VALUE 200 cache 40;
+ 
+create table departmentmaster(deptno number(50),Dname varchar2(25),location varchar2(25));
+insert into departmentmaster  values(seq_dept.NEXTVAL,'MARKETING','NEW DELHI');
+insert into departmentmaster  values(seq_dept.NEXTVAL,'SALES','chennai');
+insert into departmentmaster  values(seq_dept.NEXTVAL,'RESEARCH','BOSTON');
+
+DROP sequence seq_dept;
+ 
+CREATE INDEX no_name on emp(empno);
+select * from emp;
+
+create SYNONYM synemp for emp;
+ 
+select * from synemp;
+ 
+CREATE INDEX IDX_EMP_HIREDATE on emp(HIREDATE);
+ 
+CREATE sequence SEQ_EMP minvalue 1001 start with 1001
+	increment by 1 cache 1001; ]
