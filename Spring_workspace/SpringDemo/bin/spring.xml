@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+	xmlns:tx="http://www.springframework.org/schema/tx"
+
+
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+
+        http://www.springframework.org/schema/context
+
+        http://www.springframework.org/schema/context/spring-context.xsd
+
+        http://www.springframework.org/schema/mvc
+
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+        http://www.springframework.org/schema/tx
+
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- <bean id="triangle" class="com.cg.Triangle">
+		<property name="type" value="Equilateral"></property>
+		<property name="height" value="30"></property>
+		<constructor-arg value="20" index="1"></constructor-arg>
+		<constructor-arg value="Equilateral" index="0"></constructor-arg>
+		
+		<property name="pointA">
+			<bean class="com.cg.Point">
+				<property name="x" value="1"></property>
+				<property name="y" value="2"></property>
+			</bean>
+		</property>
+		<property name="pointB">
+			<bean class="com.cg.Point">
+				<property name="x" value="10"></property>
+				<property name="y" value="2"></property>
+			</bean>
+		</property>
+		<property name="pointC">
+			<bean class="com.cg.Point">
+				<property name="x" value="5"></property>
+				<property name="y" value="10"></property>
+			</bean>
+		</property>
+	</bean> -->
+	
+	<bean id="triangle" class="com.cg.Triangle">
+		<property name="pointA" ref="zeroPoint">
+		
+		</property>
+		<property name="pointB" ref="firstPoint"></property>
+		<property name="pointC" ref="secondPoint"></property>
+	</bean>
+
+	<!-- <bean id="triangle" class="com.cg.Triangle"> <property name="points"> 
+		<list> <ref bean="zeroPoint" /> <ref bean="firstPoint" /> <ref bean="secondPoint" 
+		/> </list> </property> </bean> -->
+
+	<bean id="zeroPoint" class="com.cg.Point">
+		<property name="x" value="1"></property>
+		<property name="y" value="0"></property>
+	</bean>
+	<bean id="firstPoint" class="com.cg.Point">
+		<property name="x" value="0"></property>
+		<property name="y" value="0"></property>
+	</bean>
+	<bean id="secondPoint" name="center" class="com.cg.Point">
+		<property name="x" value="1"></property>
+		<property name="y" value="1"></property>
+	</bean>
+
+
+	<!-- <bean id="circle" class="com.cg.Circle" autowire="byName"> <property 
+		name="center" ref="firstPoint"></property> </bean> -->
+	<bean class="com.cg.DisplayNameBeanPostProcessor"></bean>
+
+
+</beans>
