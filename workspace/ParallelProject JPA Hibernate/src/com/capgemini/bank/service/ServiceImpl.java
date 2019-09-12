@@ -30,7 +30,7 @@ public class ServiceImpl implements AccountServices {
 		if (balance != null) {
 			System.out.println("In Deposit");
 			balance = balance + amount;
-			boolean v = accountDao.addTransaction(new Transactions(accountNo, "Deposit", "CR", amount));
+			//boolean v = accountDao.addTransaction(new Transactions(accountNo, "Deposit", "CR", amount));
 			if (accountDao.updateBalance(accountNo, balance)) {
 				return true;
 			} else
@@ -47,7 +47,7 @@ public class ServiceImpl implements AccountServices {
 			if (balance < amount)
 				throw new InsufficientBalanceException(accountNo, balance, "Unable to complete transactions");
 			balance = balance - amount;
-			accountDao.addTransaction(new Transactions(accountNo, "Withdraw", "DR", amount));
+			//accountDao.addTransaction(new Transactions(accountNo, "Withdraw", "DR", amount));
 			if (accountDao.updateBalance(accountNo, balance)) {
 				return true;
 			} else
@@ -80,9 +80,9 @@ public class ServiceImpl implements AccountServices {
 
 			frombalance = frombalance - amount;
 			tobalance = tobalance + amount;
-			accountDao.addTransaction(new Transactions(fromAccountNo, "Fund Transfer To " + toAccountNo, "DR", amount));
-			accountDao
-					.addTransaction(new Transactions(toAccountNo, "Fund Transfer From " + fromAccountNo, "CR", amount));
+			//accountDao.addTransaction(new Transactions(fromAccountNo, "Fund Transfer To " + toAccountNo, "DR", amount));
+			//accountDao
+			//		.addTransaction(new Transactions(toAccountNo, "Fund Transfer From " + fromAccountNo, "CR", amount));
 			if ((accountDao.updateBalance(fromAccountNo, frombalance))
 					&& accountDao.updateBalance(toAccountNo, tobalance)) {
 				return true;
